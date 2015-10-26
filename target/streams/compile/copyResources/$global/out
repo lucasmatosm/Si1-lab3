@@ -1,0 +1,5 @@
+[0m[[0mdebug[0m] [0mCopy resource mappings: [0m
+[0m[[0mdebug[0m] [0m	(/home/lucasmdm/java/play-bd-e-testes-master/conf/routes,/home/lucasmdm/java/play-bd-e-testes-master/target/scala-2.10/classes/routes)[0m
+[0m[[0mdebug[0m] [0m	(/home/lucasmdm/java/play-bd-e-testes-master/conf/META-INF,/home/lucasmdm/java/play-bd-e-testes-master/target/scala-2.10/classes/META-INF)[0m
+[0m[[0mdebug[0m] [0m	(/home/lucasmdm/java/play-bd-e-testes-master/conf/application.conf,/home/lucasmdm/java/play-bd-e-testes-master/target/scala-2.10/classes/application.conf)[0m
+[0m[[0mdebug[0m] [0m	(/home/lucasmdm/java/play-bd-e-testes-master/conf/META-INF/persistence.xml,/home/lucasmdm/java/play-bd-e-testes-master/target/scala-2.10/classes/META-INF/persistence.xml)[0m

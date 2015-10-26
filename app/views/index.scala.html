@@ -1,0 +1,234 @@
+@(anuncios: List[Anuncio])(contador: Integer)(instrumentos: List[Instrumento])(estilos: List[Estilo])(noestilos: List[Noestilo])
+
+<html lang="">
+    <head>
+        <title>Classificado de bandas</title>
+        <meta charset="UTF-8">
+        <meta name=description content="">
+        <meta name=viewport content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Bootstrap CSS -->
+        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+            <!-- jQuery -->
+        <script src="http://code.jquery.com/jquery.js"></script>
+            <!-- Bootstrap JavaScript -->
+        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+        <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+
+
+        <script>
+$(document).ready(function(){
+	$( "#Clique" ).click(function() {
+  $("#escondido").css("display","block");
+});
+});
+</script>
+
+        <style type="text/css">
+        #escondido{
+        display:none;
+        }
+        </style>
+
+    </head>
+    <body>
+
+    <div class="content">
+
+        <div id="escondido" >
+
+            <div class="col-sm-4">
+                <h2>Novo Anuncio</h2>
+
+                <form action="@routes.Application.newAnuncio()" method="post">
+                    <label for="nome"> Nome: </label>
+                    <input type="text" name="nome" id="inputNome" class="form-control"required="required">
+
+                    <label for="descricao"> Descriçao:</label>
+                    <input type="text" name="descricao" id="inputDescricao" class="form-control"required="required">
+
+                    <label for="localizacao"> Localização: cidade/bairro </label>
+                    <input type="text" name="localizacao" id="inputLocalizacao" class="form-control"required="required">
+
+                    <label for="instrumentos"> Instrumentos: </label>
+                    <select name="instrumentos" id="inputinstrumentos" class="form-control" multiple = "multiple" required = "required">
+                       @for(instrumento <- instrumentos) {
+                            <option value="@instrumento.getId()"> @instrumento.getNome()</option>
+                        }
+                    </select>
+
+                    <label for="estilos"> Estilos: </label>
+                    <select name="estilos" id="inputestilos" class="form-control" multiple = "multiple" >
+                    @for(estilo <- estilos) {
+                        <option value="@estilo.getId()"> @estilo.getNome()</option>
+                    }
+                    </select>
+
+                    <label for="noestilos"> Estilos que nao gosta: </label>
+                    <select name="noestilos" id="inputinoestilos" class="form-control" multiple = "multiple" >
+                    @for(estilo <- noestilos) {
+                        <option value="@estilo.getId()"> @estilo.getNome()</option>
+                    }
+                    </select>
+
+
+
+
+
+                    <label for="bandaocasional">Formar banda ou tocar ocasionalmente?</label>
+                    <input type="text" name="bandaocasional" id="inputOcasional" class="form-control"required="required">
+
+                    <label for="formascontato">Formas de Contato: Email e/ou Facebook</label>
+                    <input type="text" name="formascontato" id="inputContato" class="form-control"required="required">
+
+                    <label for="chave">Chave de segurança: Apenas numeros</label>
+                    <input type="text" name="chave" id="inputchave" class="form-control"required="required">
+
+                    <input type="submit" class="btn btn-primary" value="Create">
+                </form>
+            </div>
+
+        </div>
+
+        <button target="_blank" id="Clique" align="center">criar novo anúncio</button>
+
+
+
+
+    	<div class="col-sm-50">
+        <h2 class="text-center">@contador Anuncio(s) foram finalizados</h2>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Titulo </th>
+                            <th>Descrição </th>
+                            <th>Localização </th>
+                            <th>Instrumentos tocados</th>
+                            <th>Estilos Musicais</th>
+                            <th>Estilos não aceitos</th>
+                            <th>Banda ocasional</th>
+                            <th>formas de contato</th>
+                            <th>Data da postagem</th>
+                            <th>Pergunta</th>
+                            <th>Resposta</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for(anuncio <- anuncios) {
+                            <tr>
+
+                            <td>@anuncio.getNome()</td>
+                            <td>@anuncio.getDescricao()</td>
+                            <td>@anuncio.getLocalizacao()</td>
+                            <td>@for(anuncios <- anuncio.getInstrumento()) {
+                                <p> @anuncios.getNome()</p>
+                            }</td>
+                            <td>@for(estilos <- anuncio.getEstilos()) {
+                                <p> @estilos.getNome()</p>
+                            }</td>
+                            <td>@for(estilosng <- anuncio.getNoestilo()) {
+                                <p> @estilosng.getNome()</p>
+                            }</td>
+
+
+                            <td>@anuncio.getBandaocasional()</td>
+                            <td>@anuncio.getFormascontato()</td>
+                            <td>@anuncio.getHoje().getDayOfMonth() / @anuncio.getHoje().getMonthValue() / @anuncio.getHoje().getYear()</td>
+                            <td>@anuncio.getResposta()</td>
+
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="col-sm-15">
+
+            <div class="col-sm-5">
+        <h2>Marca Anuncio como finalizado</h2>
+        <form action="/anuncios/RemoveAnuncio" method="get">
+            <select name="anuncio" id="inputAnuncio" class="form-control">
+                <option value="" disabled>-- Select One --</option>
+                @for(anuncio <- anuncios) {
+                    <option value="@anuncio.getId()"> @anuncio.getNome()</option>
+                }
+            </select>
+            <label for="nome"> Chave: </label>
+            <input type="text" name="nome" id="inputnome" class="form-control"required="required">
+            <input type="submit" class="btn btn-primary" value="ok">
+
+
+        </form>
+</div>
+
+            <div class="col-sm-5">
+                <h2>Perguntar ao Anunciante</h2>
+                <form action="/anuncios/Pergunta" method="get">
+                    <select name="anuncio" id="inputAnuncio" class="form-control">
+                        <option value="" disabled>-- Select One --</option>
+                        @for(anuncio <- anuncios) {
+                            <option value="@anuncio.getId()"> @anuncio.getNome()</option>
+                        }
+                    </select>
+                    <label for="pergunta">Pergunta : </label>
+                    <input type="text" name="pergunta" id="inputpergunta" class="form-control"required="required">
+                    <input type="submit" class="btn btn-primary" value="ok">
+
+
+                </form>
+            </div>
+
+            <div class="col-sm-5">
+                <h2>Responder a pergunta:</h2>
+                <form action="/anuncios/RemoveAnuncio" method="get">
+                    <select name="anuncio" id="inputAnuncio" class="form-control">
+                        <option value="" disabled>-- Select One --</option>
+                        @for(anuncio <- anuncios) {
+                            <option value="@anuncio.getId()"> @anuncio.getNome()</option>
+                        }
+                    </select>
+                    <label for="nome"> Chave: </label>
+                    <input type="text" name="nome" id="inputnome" class="form-control"required="required">
+                    <input type="submit" class="btn btn-primary" value="ok">
+
+
+                </form>
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+
+    </body>
+</html>
+
+
+
+<ul>
+    
+</ul>
+
+    
