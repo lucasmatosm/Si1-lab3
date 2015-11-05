@@ -44,87 +44,124 @@ Seq[Any](format.raw/*1.129*/("""
         <script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 
 
-        <script>
-$(document).ready(function()"""),format.raw/*20.29*/("""{"""),format.raw/*20.30*/("""
-	$( "#Clique" ).click(function() """),format.raw/*21.34*/("""{"""),format.raw/*21.35*/("""
-  $("#escondido").css("display","block");
-"""),format.raw/*23.1*/("""}"""),format.raw/*23.2*/(""");
-"""),format.raw/*24.1*/("""}"""),format.raw/*24.2*/(""");
-</script>
-
-        <style type="text/css">
-        #escondido"""),format.raw/*28.19*/("""{"""),format.raw/*28.20*/("""
-        display:none;
-        """),format.raw/*30.9*/("""}"""),format.raw/*30.10*/("""
+        <style type="text/css" media="all">
+            #box-toggle """),format.raw/*20.25*/("""{"""),format.raw/*20.26*/("""
+            width:500px;
+            margin:0 auto;
+            text-align:justify;
+            font:12px/1.4 Arial, Helvetica, sans-serif;
+            """),format.raw/*25.13*/("""}"""),format.raw/*25.14*/("""
+            #box-toggle .tgl """),format.raw/*26.30*/("""{"""),format.raw/*26.31*/("""margin-bottom:30px;"""),format.raw/*26.50*/("""}"""),format.raw/*26.51*/("""
+            #box-toggle span """),format.raw/*27.30*/("""{"""),format.raw/*27.31*/("""
+            display:block;
+            cursor:pointer;
+            font-weight:bold;
+            font-size:14px;
+            color:#c30;
+            margin-top:15px;
+            """),format.raw/*34.13*/("""}"""),format.raw/*34.14*/("""
         </style>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <script type="text/javascript">
+jQuery.fn.toggleText = function(a,b) """),format.raw/*38.38*/("""{"""),format.raw/*38.39*/("""
+return   this.html(this.html().replace(new RegExp("("+a+"|"+b+")"),function(x)"""),format.raw/*39.79*/("""{"""),format.raw/*39.80*/("""return(x==a)?b:a;"""),format.raw/*39.97*/("""}"""),format.raw/*39.98*/("""));
+"""),format.raw/*40.1*/("""}"""),format.raw/*40.2*/("""
+
+$(document).ready(function()"""),format.raw/*42.29*/("""{"""),format.raw/*42.30*/("""
+	$('.tgl').before('<span>Revelar conteúdo</span>');
+	$('.tgl').css('display', 'none')
+	$('span', '#box-toggle').click(function() """),format.raw/*45.44*/("""{"""),format.raw/*45.45*/("""
+		$(this).next().slideToggle('slow')
+		.siblings('.tgl:visible').slideToggle('fast');
+
+		$(this).toggleText('Revelar','Esconder')
+		.siblings('span').next('.tgl:visible').prev()
+		.toggleText('Revelar','Esconder')
+	"""),format.raw/*52.2*/("""}"""),format.raw/*52.3*/(""");
+"""),format.raw/*53.1*/("""}"""),format.raw/*53.2*/(""")
+</script>
 
     </head>
     <body>
 
-    <div class="content">
+    <div id="box-toggle">
 
-        <div id="escondido" >
+        <div class="tgl">
+            <div class="content">
 
-            <div class="col-sm-4">
-                <h2>Novo Anuncio</h2>
+                <div id="escondido" >
 
-                <form action=""""),_display_(Seq[Any](/*43.32*/routes/*43.38*/.Application.newAnuncio())),format.raw/*43.63*/("""" method="post">
-                    <label for="nome"> Nome: </label>
-                    <input type="text" name="nome" id="inputNome" class="form-control"required="required">
+                    <div class="col-sm-4">
+                        <h2>Novo Anúncio</h2>
 
-                    <label for="descricao"> Descriçao:</label>
-                    <input type="text" name="descricao" id="inputDescricao" class="form-control"required="required">
+                        <form action=""""),_display_(Seq[Any](/*69.40*/routes/*69.46*/.Application.newAnuncio())),format.raw/*69.71*/("""" method="post">
+                            <label for="nome"> Nome: </label>
+                            <input type="text" name="nome" id="inputNome" class="form-control"required="required">
 
-                    <label for="localizacao"> Localização: cidade/bairro </label>
-                    <input type="text" name="localizacao" id="inputLocalizacao" class="form-control"required="required">
+                            <label for="descricao"> Descriçao:</label>
+                            <input type="text" name="descricao" id="inputDescricao" class="form-control"required="required">
 
-                    <label for="instrumentos"> Instrumentos: </label>
-                    <select name="instrumentos" id="inputinstrumentos" class="form-control" multiple = "multiple" required = "required">
-                       """),_display_(Seq[Any](/*55.25*/for(instrumento <- instrumentos) yield /*55.57*/ {_display_(Seq[Any](format.raw/*55.59*/("""
-                            <option value=""""),_display_(Seq[Any](/*56.45*/instrumento/*56.56*/.getId())),format.raw/*56.64*/(""""> """),_display_(Seq[Any](/*56.68*/instrumento/*56.79*/.getNome())),format.raw/*56.89*/("""</option>
-                        """)))})),format.raw/*57.26*/("""
-                    </select>
+                            <label for="localizacao"> Localização: cidade/bairro </label>
+                            <input type="text" name="localizacao" id="inputLocalizacao" class="form-control"required="required">
 
-                    <label for="estilos"> Estilos: </label>
-                    <select name="estilos" id="inputestilos" class="form-control" multiple = "multiple" >
-                    """),_display_(Seq[Any](/*62.22*/for(estilo <- estilos) yield /*62.44*/ {_display_(Seq[Any](format.raw/*62.46*/("""
-                        <option value=""""),_display_(Seq[Any](/*63.41*/estilo/*63.47*/.getId())),format.raw/*63.55*/(""""> """),_display_(Seq[Any](/*63.59*/estilo/*63.65*/.getNome())),format.raw/*63.75*/("""</option>
-                    """)))})),format.raw/*64.22*/("""
-                    </select>
+                            <label for="instrumentos"> Instrumentos: </label>
+                            <select name="instrumentos" id="inputinstrumentos" class="form-control" multiple = "multiple" required = "required">
+                                """),_display_(Seq[Any](/*81.34*/for(instrumento <- instrumentos) yield /*81.66*/ {_display_(Seq[Any](format.raw/*81.68*/("""
+                                <option value=""""),_display_(Seq[Any](/*82.49*/instrumento/*82.60*/.getId())),format.raw/*82.68*/(""""> """),_display_(Seq[Any](/*82.72*/instrumento/*82.83*/.getNome())),format.raw/*82.93*/("""</option>
+                                """)))})),format.raw/*83.34*/("""
+                            </select>
 
-                    <label for="noestilos"> Estilos que nao gosta: </label>
-                    <select name="noestilos" id="inputinoestilos" class="form-control" multiple = "multiple" >
-                    """),_display_(Seq[Any](/*69.22*/for(estilo <- noestilos) yield /*69.46*/ {_display_(Seq[Any](format.raw/*69.48*/("""
-                        <option value=""""),_display_(Seq[Any](/*70.41*/estilo/*70.47*/.getId())),format.raw/*70.55*/(""""> """),_display_(Seq[Any](/*70.59*/estilo/*70.65*/.getNome())),format.raw/*70.75*/("""</option>
-                    """)))})),format.raw/*71.22*/("""
-                    </select>
+                            <label for="estilos"> Estilos: </label>
+                            <select name="estilos" id="inputestilos" class="form-control" multiple = "multiple" >
+                                """),_display_(Seq[Any](/*88.34*/for(estilo <- estilos) yield /*88.56*/ {_display_(Seq[Any](format.raw/*88.58*/("""
+                                <option value=""""),_display_(Seq[Any](/*89.49*/estilo/*89.55*/.getId())),format.raw/*89.63*/(""""> """),_display_(Seq[Any](/*89.67*/estilo/*89.73*/.getNome())),format.raw/*89.83*/("""</option>
+                                """)))})),format.raw/*90.34*/("""
+                            </select>
+
+                            <label for="noestilos"> Estilos que nao gosta: </label>
+                            <select name="noestilos" id="inputinoestilos" class="form-control" multiple = "multiple" >
+                                """),_display_(Seq[Any](/*95.34*/for(estilo <- noestilos) yield /*95.58*/ {_display_(Seq[Any](format.raw/*95.60*/("""
+                                <option value=""""),_display_(Seq[Any](/*96.49*/estilo/*96.55*/.getId())),format.raw/*96.63*/(""""> """),_display_(Seq[Any](/*96.67*/estilo/*96.73*/.getNome())),format.raw/*96.83*/("""</option>
+                                """)))})),format.raw/*97.34*/("""
+                            </select>
 
 
 
 
 
-                    <label for="bandaocasional">Formar banda ou tocar ocasionalmente?</label>
-                    <input type="text" name="bandaocasional" id="inputOcasional" class="form-control"required="required">
+                            <label for="bandaocasional">Formar banda ou tocar ocasionalmente?</label>
+                            <input type="text" name="bandaocasional" id="inputOcasional" class="form-control"required="required">
 
-                    <label for="formascontato">Formas de Contato: Email e/ou Facebook</label>
-                    <input type="text" name="formascontato" id="inputContato" class="form-control"required="required">
+                            <label for="formascontato">Formas de Contato: Email e/ou Facebook</label>
+                            <input type="text" name="formascontato" id="inputContato" class="form-control"required="required">
 
-                    <label for="chave">Chave de segurança: Apenas numeros</label>
-                    <input type="text" name="chave" id="inputchave" class="form-control"required="required">
+                            <label for="chave">Chave de segurança: Apenas numeros</label>
+                            <input type="text" name="chave" id="inputchave" class="form-control"required="required">
 
-                    <input type="submit" class="btn btn-primary" value="Create">
-                </form>
-            </div>
+                            <input type="submit" class="btn btn-primary" value="Create">
+                        </form>
+                    </div>
 
+                </div>
         </div>
 
-        <button target="_blank" id="Clique" align="center">criar novo anúncio</button>
+        <div class="tgl">
+            <h2>Conteúdo dois</h2>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi eleifend, purus quis laoreet faucibus, ante augue malesuada mi, id rhoncus augue lorem eget elit.</p>
+            <p> Duis posuere odio sed velit vulputate venenatis. Suspendisse et dui ac metus auctor fringilla. Curabitur interdum augue a pede.</p>
+        </div>
 
+        <div class="tgl">
+            <h2>Conteúdo três</h2>
+            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi eleifend, purus quis laoreet faucibus, ante augue malesuada mi, id rhoncus augue lorem eget elit.</p>
+            <p>Ut sollicitudin sodales purus. Phasellus libero felis, blandit nec, commodo ut, imperdiet ut, nibh. Suspendisse potenti. Donec ullamcorper cursus dolor. Duis vitae ipsum. Maecenas dapibus hendrerit diam. Morbi varius, massa id pretium accumsan, nunc lorem congue libero, ut euismod metus libero id nulla.</p>
+        </div>
 
+    </div>
+        
 
-
-    	<div class="col-sm-50">
-        <h2 class="text-center">"""),_display_(Seq[Any](/*99.34*/contador)),format.raw/*99.42*/(""" Anuncio(s) foram finalizados</h2>
+    	<div class="col-sm-100">
+        <h2 class="text-center">"""),_display_(Seq[Any](/*136.34*/contador)),format.raw/*136.42*/(""" Anúncio(s) foram finalizados</h2>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -144,30 +181,30 @@ $(document).ready(function()"""),format.raw/*20.29*/("""{"""),format.raw/*20.30*
                     </thead>
                     <tbody>
 
-                        """),_display_(Seq[Any](/*119.26*/for(anuncio <- anuncios) yield /*119.50*/ {_display_(Seq[Any](format.raw/*119.52*/("""
+                        """),_display_(Seq[Any](/*156.26*/for(anuncio <- anuncios) yield /*156.50*/ {_display_(Seq[Any](format.raw/*156.52*/("""
                             <tr>
 
-                            <td>"""),_display_(Seq[Any](/*122.34*/anuncio/*122.41*/.getNome())),format.raw/*122.51*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*123.34*/anuncio/*123.41*/.getDescricao())),format.raw/*123.56*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*124.34*/anuncio/*124.41*/.getLocalizacao())),format.raw/*124.58*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*125.34*/for(anuncios <- anuncio.getInstrumento()) yield /*125.75*/ {_display_(Seq[Any](format.raw/*125.77*/("""
-                                <p> """),_display_(Seq[Any](/*126.38*/anuncios/*126.46*/.getNome())),format.raw/*126.56*/("""</p>
-                            """)))})),format.raw/*127.30*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*128.34*/for(estilos <- anuncio.getEstilos()) yield /*128.70*/ {_display_(Seq[Any](format.raw/*128.72*/("""
-                                <p> """),_display_(Seq[Any](/*129.38*/estilos/*129.45*/.getNome())),format.raw/*129.55*/("""</p>
-                            """)))})),format.raw/*130.30*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*131.34*/for(estilosng <- anuncio.getNoestilo()) yield /*131.73*/ {_display_(Seq[Any](format.raw/*131.75*/("""
-                                <p> """),_display_(Seq[Any](/*132.38*/estilosng/*132.47*/.getNome())),format.raw/*132.57*/("""</p>
-                            """)))})),format.raw/*133.30*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*159.34*/anuncio/*159.41*/.getNome())),format.raw/*159.51*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*160.34*/anuncio/*160.41*/.getDescricao())),format.raw/*160.56*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*161.34*/anuncio/*161.41*/.getLocalizacao())),format.raw/*161.58*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*162.34*/for(anuncios <- anuncio.getInstrumento()) yield /*162.75*/ {_display_(Seq[Any](format.raw/*162.77*/("""
+                                <p> """),_display_(Seq[Any](/*163.38*/anuncios/*163.46*/.getNome())),format.raw/*163.56*/("""</p>
+                            """)))})),format.raw/*164.30*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*165.34*/for(estilos <- anuncio.getEstilos()) yield /*165.70*/ {_display_(Seq[Any](format.raw/*165.72*/("""
+                                <p> """),_display_(Seq[Any](/*166.38*/estilos/*166.45*/.getNome())),format.raw/*166.55*/("""</p>
+                            """)))})),format.raw/*167.30*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*168.34*/for(estilosng <- anuncio.getNoestilo()) yield /*168.73*/ {_display_(Seq[Any](format.raw/*168.75*/("""
+                                <p> """),_display_(Seq[Any](/*169.38*/estilosng/*169.47*/.getNome())),format.raw/*169.57*/("""</p>
+                            """)))})),format.raw/*170.30*/("""</td>
 
 
-                            <td>"""),_display_(Seq[Any](/*136.34*/anuncio/*136.41*/.getBandaocasional())),format.raw/*136.61*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*137.34*/anuncio/*137.41*/.getFormascontato())),format.raw/*137.60*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*138.34*/anuncio/*138.41*/.getHoje().getDayOfMonth())),format.raw/*138.67*/(""" / """),_display_(Seq[Any](/*138.71*/anuncio/*138.78*/.getHoje().getMonthValue())),format.raw/*138.104*/(""" / """),_display_(Seq[Any](/*138.108*/anuncio/*138.115*/.getHoje().getYear())),format.raw/*138.135*/("""</td>
-                            <td>"""),_display_(Seq[Any](/*139.34*/anuncio/*139.41*/.getResposta())),format.raw/*139.55*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*173.34*/anuncio/*173.41*/.getBandaocasional())),format.raw/*173.61*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*174.34*/anuncio/*174.41*/.getFormascontato())),format.raw/*174.60*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*175.34*/anuncio/*175.41*/.getHoje().getDayOfMonth())),format.raw/*175.67*/(""" / """),_display_(Seq[Any](/*175.71*/anuncio/*175.78*/.getHoje().getMonthValue())),format.raw/*175.104*/(""" / """),_display_(Seq[Any](/*175.108*/anuncio/*175.115*/.getHoje().getYear())),format.raw/*175.135*/("""</td>
+                            <td>"""),_display_(Seq[Any](/*176.34*/anuncio/*176.41*/.getResposta())),format.raw/*176.55*/("""</td>
 
                         </tr>
-                    """)))})),format.raw/*142.22*/("""
+                    """)))})),format.raw/*179.22*/("""
                     </tbody>
                 </table>
             </div>
@@ -190,13 +227,13 @@ $(document).ready(function()"""),format.raw/*20.29*/("""{"""),format.raw/*20.30*
 		<div class="col-sm-15">
 
             <div class="col-sm-5">
-        <h2>Marca Anuncio como finalizado</h2>
+        <h2>Marcar Anuncio como finalizado</h2>
         <form action="/anuncios/RemoveAnuncio" method="get">
             <select name="anuncio" id="inputAnuncio" class="form-control">
                 <option value="" disabled>-- Select One --</option>
-                """),_display_(Seq[Any](/*169.18*/for(anuncio <- anuncios) yield /*169.42*/ {_display_(Seq[Any](format.raw/*169.44*/("""
-                    <option value=""""),_display_(Seq[Any](/*170.37*/anuncio/*170.44*/.getId())),format.raw/*170.52*/(""""> """),_display_(Seq[Any](/*170.56*/anuncio/*170.63*/.getNome())),format.raw/*170.73*/("""</option>
-                """)))})),format.raw/*171.18*/("""
+                """),_display_(Seq[Any](/*206.18*/for(anuncio <- anuncios) yield /*206.42*/ {_display_(Seq[Any](format.raw/*206.44*/("""
+                    <option value=""""),_display_(Seq[Any](/*207.37*/anuncio/*207.44*/.getId())),format.raw/*207.52*/(""""> """),_display_(Seq[Any](/*207.56*/anuncio/*207.63*/.getNome())),format.raw/*207.73*/("""</option>
+                """)))})),format.raw/*208.18*/("""
             </select>
             <label for="nome"> Chave: </label>
             <input type="text" name="nome" id="inputnome" class="form-control"required="required">
@@ -211,9 +248,9 @@ $(document).ready(function()"""),format.raw/*20.29*/("""{"""),format.raw/*20.30*
                 <form action="/anuncios/Pergunta" method="get">
                     <select name="anuncio" id="inputAnuncio" class="form-control">
                         <option value="" disabled>-- Select One --</option>
-                        """),_display_(Seq[Any](/*186.26*/for(anuncio <- anuncios) yield /*186.50*/ {_display_(Seq[Any](format.raw/*186.52*/("""
-                            <option value=""""),_display_(Seq[Any](/*187.45*/anuncio/*187.52*/.getId())),format.raw/*187.60*/(""""> """),_display_(Seq[Any](/*187.64*/anuncio/*187.71*/.getNome())),format.raw/*187.81*/("""</option>
-                        """)))})),format.raw/*188.26*/("""
+                        """),_display_(Seq[Any](/*223.26*/for(anuncio <- anuncios) yield /*223.50*/ {_display_(Seq[Any](format.raw/*223.52*/("""
+                            <option value=""""),_display_(Seq[Any](/*224.45*/anuncio/*224.52*/.getId())),format.raw/*224.60*/(""""> """),_display_(Seq[Any](/*224.64*/anuncio/*224.71*/.getNome())),format.raw/*224.81*/("""</option>
+                        """)))})),format.raw/*225.26*/("""
                     </select>
                     <label for="pergunta">Pergunta : </label>
                     <input type="text" name="pergunta" id="inputpergunta" class="form-control"required="required">
@@ -228,9 +265,9 @@ $(document).ready(function()"""),format.raw/*20.29*/("""{"""),format.raw/*20.30*
                 <form action="/anuncios/RemoveAnuncio" method="get">
                     <select name="anuncio" id="inputAnuncio" class="form-control">
                         <option value="" disabled>-- Select One --</option>
-                        """),_display_(Seq[Any](/*203.26*/for(anuncio <- anuncios) yield /*203.50*/ {_display_(Seq[Any](format.raw/*203.52*/("""
-                            <option value=""""),_display_(Seq[Any](/*204.45*/anuncio/*204.52*/.getId())),format.raw/*204.60*/(""""> """),_display_(Seq[Any](/*204.64*/anuncio/*204.71*/.getNome())),format.raw/*204.81*/("""</option>
-                        """)))})),format.raw/*205.26*/("""
+                        """),_display_(Seq[Any](/*240.26*/for(anuncio <- anuncios) yield /*240.50*/ {_display_(Seq[Any](format.raw/*240.52*/("""
+                            <option value=""""),_display_(Seq[Any](/*241.45*/anuncio/*241.52*/.getId())),format.raw/*241.60*/(""""> """),_display_(Seq[Any](/*241.64*/anuncio/*241.71*/.getNome())),format.raw/*241.81*/("""</option>
+                        """)))})),format.raw/*242.26*/("""
                     </select>
                     <label for="nome"> Chave: </label>
                     <input type="text" name="nome" id="inputnome" class="form-control"required="required">
@@ -272,11 +309,11 @@ $(document).ready(function()"""),format.raw/*20.29*/("""{"""),format.raw/*20.30*
 }
                 /*
                     -- GENERATED --
-                    DATE: Fri Jun 05 00:05:23 BRT 2015
-                    SOURCE: /home/lucasmdm/java/play-bd-e-testes-master/app/views/index.scala.html
-                    HASH: 8e79f89d5c3b986077e7357b2d7e9e2886a24729
-                    MATRIX: 835->1|1057->128|1938->981|1967->982|2029->1016|2058->1017|2128->1060|2156->1061|2186->1064|2214->1065|2306->1129|2335->1130|2393->1161|2422->1162|2664->1368|2679->1374|2726->1399|3557->2194|3605->2226|3645->2228|3726->2273|3746->2284|3776->2292|3816->2296|3836->2307|3868->2317|3935->2352|4190->2571|4228->2593|4268->2595|4345->2636|4360->2642|4390->2650|4430->2654|4445->2660|4477->2670|4540->2701|4816->2941|4856->2965|4896->2967|4973->3008|4988->3014|5018->3022|5058->3026|5073->3032|5105->3042|5168->3073|6157->4026|6187->4034|7088->4898|7129->4922|7170->4924|7275->4992|7292->4999|7325->5009|7401->5048|7418->5055|7456->5070|7532->5109|7549->5116|7589->5133|7665->5172|7723->5213|7764->5215|7839->5253|7857->5261|7890->5271|7957->5305|8033->5344|8086->5380|8127->5382|8202->5420|8219->5427|8252->5437|8319->5471|8395->5510|8451->5549|8492->5551|8567->5589|8586->5598|8619->5608|8686->5642|8764->5683|8781->5690|8824->5710|8900->5749|8917->5756|8959->5775|9035->5814|9052->5821|9101->5847|9142->5851|9159->5858|9209->5884|9251->5888|9269->5895|9313->5915|9389->5954|9406->5961|9443->5975|9534->6033|10005->6467|10046->6491|10087->6493|10161->6530|10178->6537|10209->6545|10250->6549|10267->6556|10300->6566|10360->6593|10993->7189|11034->7213|11075->7215|11157->7260|11174->7267|11205->7275|11246->7279|11263->7286|11296->7296|11364->7331|12067->7997|12108->8021|12149->8023|12231->8068|12248->8075|12279->8083|12320->8087|12337->8094|12370->8104|12438->8139
-                    LINES: 26->1|29->1|48->20|48->20|49->21|49->21|51->23|51->23|52->24|52->24|56->28|56->28|58->30|58->30|71->43|71->43|71->43|83->55|83->55|83->55|84->56|84->56|84->56|84->56|84->56|84->56|85->57|90->62|90->62|90->62|91->63|91->63|91->63|91->63|91->63|91->63|92->64|97->69|97->69|97->69|98->70|98->70|98->70|98->70|98->70|98->70|99->71|127->99|127->99|147->119|147->119|147->119|150->122|150->122|150->122|151->123|151->123|151->123|152->124|152->124|152->124|153->125|153->125|153->125|154->126|154->126|154->126|155->127|156->128|156->128|156->128|157->129|157->129|157->129|158->130|159->131|159->131|159->131|160->132|160->132|160->132|161->133|164->136|164->136|164->136|165->137|165->137|165->137|166->138|166->138|166->138|166->138|166->138|166->138|166->138|166->138|166->138|167->139|167->139|167->139|170->142|197->169|197->169|197->169|198->170|198->170|198->170|198->170|198->170|198->170|199->171|214->186|214->186|214->186|215->187|215->187|215->187|215->187|215->187|215->187|216->188|231->203|231->203|231->203|232->204|232->204|232->204|232->204|232->204|232->204|233->205
+                    DATE: Wed Oct 28 22:23:25 BRT 2015
+                    SOURCE: /home/lucas/SI-LABS/Si1-lab2/app/views/index.scala.html
+                    HASH: ff9c3468fcfbf68100a6515eed7bc4414cc0e087
+                    MATRIX: 835->1|1057->128|1961->1004|1990->1005|2171->1158|2200->1159|2258->1189|2287->1190|2334->1209|2363->1210|2421->1240|2450->1241|2657->1420|2686->1421|2928->1635|2957->1636|3064->1715|3093->1716|3138->1733|3167->1734|3198->1738|3226->1739|3284->1769|3313->1770|3471->1900|3500->1901|3743->2117|3771->2118|3801->2121|3829->2122|4158->2415|4173->2421|4220->2446|5124->3314|5172->3346|5212->3348|5297->3397|5317->3408|5347->3416|5387->3420|5407->3431|5439->3441|5514->3484|5805->3739|5843->3761|5883->3763|5968->3812|5983->3818|6013->3826|6053->3830|6068->3836|6100->3846|6175->3889|6487->4165|6527->4189|6567->4191|6652->4240|6667->4246|6697->4254|6737->4258|6752->4264|6784->4274|6859->4317|8871->6292|8902->6300|9803->7164|9844->7188|9885->7190|9990->7258|10007->7265|10040->7275|10116->7314|10133->7321|10171->7336|10247->7375|10264->7382|10304->7399|10380->7438|10438->7479|10479->7481|10554->7519|10572->7527|10605->7537|10672->7571|10748->7610|10801->7646|10842->7648|10917->7686|10934->7693|10967->7703|11034->7737|11110->7776|11166->7815|11207->7817|11282->7855|11301->7864|11334->7874|11401->7908|11479->7949|11496->7956|11539->7976|11615->8015|11632->8022|11674->8041|11750->8080|11767->8087|11816->8113|11857->8117|11874->8124|11924->8150|11966->8154|11984->8161|12028->8181|12104->8220|12121->8227|12158->8241|12249->8299|12721->8734|12762->8758|12803->8760|12877->8797|12894->8804|12925->8812|12966->8816|12983->8823|13016->8833|13076->8860|13709->9456|13750->9480|13791->9482|13873->9527|13890->9534|13921->9542|13962->9546|13979->9553|14012->9563|14080->9598|14783->10264|14824->10288|14865->10290|14947->10335|14964->10342|14995->10350|15036->10354|15053->10361|15086->10371|15154->10406
+                    LINES: 26->1|29->1|48->20|48->20|53->25|53->25|54->26|54->26|54->26|54->26|55->27|55->27|62->34|62->34|66->38|66->38|67->39|67->39|67->39|67->39|68->40|68->40|70->42|70->42|73->45|73->45|80->52|80->52|81->53|81->53|97->69|97->69|97->69|109->81|109->81|109->81|110->82|110->82|110->82|110->82|110->82|110->82|111->83|116->88|116->88|116->88|117->89|117->89|117->89|117->89|117->89|117->89|118->90|123->95|123->95|123->95|124->96|124->96|124->96|124->96|124->96|124->96|125->97|164->136|164->136|184->156|184->156|184->156|187->159|187->159|187->159|188->160|188->160|188->160|189->161|189->161|189->161|190->162|190->162|190->162|191->163|191->163|191->163|192->164|193->165|193->165|193->165|194->166|194->166|194->166|195->167|196->168|196->168|196->168|197->169|197->169|197->169|198->170|201->173|201->173|201->173|202->174|202->174|202->174|203->175|203->175|203->175|203->175|203->175|203->175|203->175|203->175|203->175|204->176|204->176|204->176|207->179|234->206|234->206|234->206|235->207|235->207|235->207|235->207|235->207|235->207|236->208|251->223|251->223|251->223|252->224|252->224|252->224|252->224|252->224|252->224|253->225|268->240|268->240|268->240|269->241|269->241|269->241|269->241|269->241|269->241|270->242
                     -- GENERATED --
                 */
             
